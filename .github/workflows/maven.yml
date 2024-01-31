@@ -22,6 +22,9 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
+    - name: Navigate to the project directory
+      run: cd helloworldapplication  # Adjust this to the correct directory
+
     - name: Build with Maven
       run: mvn clean install
 
@@ -31,6 +34,6 @@ jobs:
         image: aratimahe/helloworldapplication
         tags: latest
         registry: docker.io
-        dockerfile: helloworldapplication/Dockerfile  # Adjust the path to your Dockerfile
+        dockerfile: Dockerfile
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
