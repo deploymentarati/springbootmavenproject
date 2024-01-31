@@ -25,8 +25,7 @@ jobs:
       run: ls -R helloworldapplication
 
     - name: Build Maven project
-      run: helloworldapplication/mvnw clean install
-      working-directory: helloworldapplication
+      run: mvn -f helloworldapplication clean install
 
     - name: Print contents of target directory
       run: ls -R helloworldapplication/target
