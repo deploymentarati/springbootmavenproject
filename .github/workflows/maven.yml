@@ -12,9 +12,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-      with:
-        path: helloworldapplication  # Adjust the path to your project directory
+    - name: Checkout repository
+      uses: actions/checkout@v4
 
     - name: Set up JDK 17
       uses: actions/setup-java@v4
@@ -23,15 +22,17 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
+    - name: Change to project directory
+      run: cd helloworldapplication
+
     - name: Clean Up Artifacts
-      run: rm -rf helloworldapplication/target
+      run: rm -rf target
 
     - name: Build with Maven
       run: mvn clean install
-      working-directory: helloworldapplication  # Set the working directory to your project
 
     - name: Show Target Directory
-      run: ls -R helloworldapplication/target
+      run: ls -R target
 
     - name: Build & push Docker image
       uses: mr-smithers-excellent/docker-build-push@v5
