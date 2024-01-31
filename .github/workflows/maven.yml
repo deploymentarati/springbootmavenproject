@@ -1,4 +1,4 @@
-name: Java CI CD pipeline with maven 
+name: Java CI CD pipeline with Maven 
 
 on:
   push:
@@ -8,35 +8,29 @@ on:
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v2
 
     - name: Set up JDK 17
-      uses: actions/setup-java@v3
+      uses: actions/setup-java@v2
       with:
         java-version: '17'
-        distribution: 'temurin'
-        cache: maven
 
-    - name: Print contents of helloworldapplication directory
-      run: ls -R helloworldapplication
-
-    - name: Build Maven project
-      run: mvn -f helloworldapplication clean install
-
-    - name: Print contents of target directory
-      run: ls -R helloworldapplication/target
+    - name: Build with Maven
+      run: |
+        cd helloworldapplication
+        mvn clean install
 
     - name: Build & push Docker image
-      uses: mr-smithers-excellent/docker-build-push@v5
+      uses: docker/build-push-action@v2
       with:
-        context: helloworldapplication
-        dockerfile: Dockerfile
-        image: aratimahe/helloworldapplication
-        tags: latest
-        registry: docker.io
+        context: ./helloworldapplication
+        file: ./helloworldapplication/Dockerfile
+        push: true
+        tags: aratimahe/helloworldapplication:latest
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
