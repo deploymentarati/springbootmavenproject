@@ -2,10 +2,12 @@ name: Build and Push Docker Image
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
 
     steps:
@@ -24,12 +26,22 @@ jobs:
         cd helloworldapplication
         mvn clean install
 
-    - name: Build & Push Docker image
-      uses: mr-smithers-excellent/docker-build-push@v5
-      with:
-        image: aratimahe/helloworldapplication
-        tags: latest
-        registry: docker.io
-        dockerfile: Dockerfile
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
+    - name: Print Directory Contents
+      run: |
+        ls -R
+        ls -R helloworldapplication/target
+
+    - name: Include target directory
+      run: |
+        mv helloworldapplication/target .
+
+    - name: Build Docker Image
+      run: |
+        docker build -f helloworldapplication/Dockerfile -t aratimahe/helloworldapplication:latest .
+
+    - name: Push Docker Image
+      run: |
+        docker push aratimahe/helloworldapplication:latest
+      env:
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
