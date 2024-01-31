@@ -33,6 +33,6 @@ jobs:
         image: aratimahe/helloworldapplication
         tags: latest
         registry: docker.io
-        dockerfile: Dockerfile
+        dockerfile: helloworldapplication/Dockerfile
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
