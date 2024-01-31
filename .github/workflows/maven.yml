@@ -25,6 +25,11 @@ jobs:
         cd helloworldapplication
         mvn clean install
 
+    - name: Print Directory Contents
+      run: |
+        ls -R
+        ls -R helloworldapplication/target
+
     - name: Build Docker Image
       run: docker build -f helloworldapplication/Dockerfile -t aratimahe/helloworldapplication:latest .
 
