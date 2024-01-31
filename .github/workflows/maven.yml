@@ -2,40 +2,36 @@ name: Java CI CD pipeline with Maven
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
   pull_request:
-    branches:
-      - main
+    branches: [main]
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+    - name: Checkout repository
+      uses: actions/checkout@v3
 
-      - name: Set up JDK 17
-        uses: actions/setup-java@v2
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-          cache: maven
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
 
-      - name: Build with Maven
-        run: |
-          cd helloworldapplication
-          mvn clean install
+    - name: Build with Maven
+      run: |
+        cd helloworldapplication
+        mvn clean install
 
-      - name: Build & push Docker image
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: helloworldapplication/Dockerfile
-          push: true
-          tags: aratimahe/helloworldapplication:latest
-          build-args: JAR_FILE=target/helloworldapplication.jar
-        env:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+    - name: Build & push Docker image
+      run: |
+        docker buildx create --use
+        docker buildx inspect --bootstrap
+        docker buildx build --platform linux/amd64,linux/arm64 -t aratimahe/helloworldapplication:latest --push .
+      env:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
