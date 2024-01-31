@@ -1,3 +1,11 @@
+# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
 name: Java CI CD pipeline with maven 
 
 on:
@@ -12,40 +20,32 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
+    - name: Checkout code
       uses: actions/checkout@v4
 
     - name: Set up JDK 17
-      uses: actions/setup-java@v4
+      uses: actions/setup-java@v3
       with:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
 
-    - name: Display Maven version
-      run: mvn --version
-
-    - name: Print current directory
-      run: pwd
-
     - name: Print contents of helloworldapplication directory
       run: ls -R helloworldapplication
 
-    - name: Check if target directory exists
-      run: '[ -d "helloworldapplication/target" ] && echo "Target exists" || echo "Target does not exist"'
+    - name: Print contents of target directory
+      run: ls -R helloworldapplication/target
 
-    - name: Compile with Maven
-      run: mvn compile -f helloworldapplication/pom.xml
-
-    - name: Package with Maven
-      run: mvn package -f helloworldapplication/pom.xml
+    - name: Disable Maven cache and clean install
+      run: mvn clean install -f helloworldapplication/pom.xml
 
     - name: Build & push Docker image
       uses: mr-smithers-excellent/docker-build-push@v5
       with:
+        context: helloworldapplication
+        dockerfile: Dockerfile
         image: aratimahe/helloworldapplication
         tags: latest
         registry: docker.io
-        dockerfile: helloworldapplication/Dockerfile
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
