@@ -30,6 +30,10 @@ jobs:
         ls -R
         ls -R helloworldapplication/target
 
+    - name: Include target directory
+      run: |
+        mv helloworldapplication/target .
+
     - name: Build Docker Image
       run: docker build -f helloworldapplication/Dockerfile -t aratimahe/helloworldapplication:latest .
 
