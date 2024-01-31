@@ -15,6 +15,12 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
+    - name: Display current directory
+      run: pwd
+
+    - name: List contents of current directory
+      run: ls -la
+
     - name: Set up JDK 17
       uses: actions/setup-java@v4
       with:
@@ -24,6 +30,9 @@ jobs:
 
     - name: Change to project directory
       run: cd helloworldapplication
+
+    - name: Display current directory after change
+      run: pwd
 
     - name: Clean Up Artifacts
       run: rm -rf target
