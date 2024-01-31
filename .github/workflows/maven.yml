@@ -31,7 +31,7 @@ jobs:
       run: |
         docker buildx create --use
         docker buildx inspect --bootstrap
-        docker buildx build --platform linux/amd64,linux/arm64 -t aratimahe/helloworldapplication:latest --push .
+        docker buildx build --platform linux/amd64,linux/arm64 -t aratimahe/helloworldapplication:latest --push -f helloworldapplication/Dockerfile .
       env:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
