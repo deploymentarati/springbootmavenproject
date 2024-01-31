@@ -35,7 +35,7 @@ jobs:
         mv helloworldapplication/target .
 
     - name: Build Docker Image
-      run: docker build -f helloworldapplication/Dockerfile -t aratimahe/helloworldapplication:latest .
+      run: docker build -f Dockerfile -t aratimahe/helloworldapplication:latest .
 
     - name: Push Docker Image
       run: docker push aratimahe/helloworldapplication:latest
