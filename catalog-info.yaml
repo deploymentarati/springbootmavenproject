@@ -2,9 +2,14 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: springbootmavenproject
+  description: |
+    A description of your Spring Boot Maven project.
+  links:
+    - title: GitHub Repository
+      url: https://github.com/deploymentarati/springbootmavenproject
   annotations:
     github.com/project-slug: deploymentarati/springbootmavenproject
 spec:
-  type: other
-  lifecycle: unknown
+  type: other  # Use 'other' for non-library components, adjust as needed
   owner: deploymentarati
+  lifecycle: unknown  # Set the appropriate lifecycle stage
