@@ -13,16 +13,10 @@ metadata:
   name: springbootmavenproject
   description: |
     A description of your Spring Boot Maven project.
-  links:
-    - title: GitHub Repository
-      url: https://github.com/deploymentarati/springbootmavenproject
 spec:
   type: service
   owner: deploymentarati
   lifecycle: development
-  relations:
-    - type: belongsTo
-      target: group:default/deploymentarati
   catalogInfo:
     catalog:
       https://raw.githubusercontent.com/deploymentarati/springbootmavenproject/main/catalog-info.yaml
