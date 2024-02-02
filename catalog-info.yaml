@@ -1,9 +1,11 @@
+# First document - Group definition
 apiVersion: backstage.io/v1alpha1
 kind: Group
 metadata:
   name: deploymentarati
   description: Your group description here
-
+---
+# Second document - Component definition
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
@@ -20,4 +22,3 @@ spec:
   catalogInfo:
     catalog:
       https://github.com/deploymentarati/springbootmavenproject/edit/main/catalog-info.yaml
-
