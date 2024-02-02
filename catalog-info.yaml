@@ -1,22 +1,22 @@
-# Group Entity
 apiVersion: backstage.io/v1alpha1
 kind: Group
 metadata:
   name: deploymentarati
   description: Your group description here
----
 
-# Component Entity
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: springbootmavenproject
   description: |
     A description of your Spring Boot Maven project.
+  links:
+    - title: GitHub Repository
+      url: https://github.com/deploymentarati/springbootmavenproject
 spec:
   type: service
   owner: deploymentarati
   lifecycle: development
   catalogInfo:
     catalog:
-      https://raw.githubusercontent.com/deploymentarati/springbootmavenproject/main/catalog-info.yaml
+      https://github.com/deploymentarati/springbootmavenproject/edit/main/catalog-info.yaml
