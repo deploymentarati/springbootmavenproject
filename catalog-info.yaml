@@ -10,6 +10,9 @@ metadata:
   annotations:
     github.com/project-slug: deploymentarati/springbootmavenproject
 spec:
-  type: other  # Use 'other' for non-library components, adjust as needed
+  type: service
   owner: deploymentarati
-  lifecycle: unknown  # Set the appropriate lifecycle stage
+  lifecycle: development
+  catalogInfo:
+    catalog:
+      https://github.com/deploymentarati/springbootmavenproject/edit/main/catalog-info.yaml
