@@ -25,4 +25,4 @@ spec:
       target: group:default/deploymentarati
   catalogInfo:
     catalog:
-      https://github.com/deploymentarati/springbootmavenproject/edit/main/catalog-info.yaml
+      https://raw.githubusercontent.com/deploymentarati/springbootmavenproject/main/catalog-info.yaml
