@@ -1,0 +1,58 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+
+    - name: Build with Maven
+      run: |
+        cd helloworldapplication
+        mvn clean install
+
+    - name: Print Directory Contents
+      run: |
+        ls -R
+        ls -R helloworldapplication/target
+
+    - name: Include target directory
+      run: |
+        mv helloworldapplication/target .
+
+    - name: Build Docker Image
+      run: |
+        docker build -f helloworldapplication/Dockerfile -t aratimahe/helloworldapplication:latest .
+
+        docker images
+
+    - name: JFrog CLI Setup
+      uses: jfrog/setup-jfrog-cli@v3
+      with:
+        jfrog-cli-version: 'latest'
+      env:
+        JF_URL: ${{ secrets.JfrogArtifacttory }}
+        JF_USER: ${{ secrets.JfrogUser }}
+        JF_PASSWORD: ${{ secrets.JfrogUserAPIKey }}
+        JF_SERVER_ID: "SERVER"
+
+    - name: JFrog CLI Ping
+      run: jfrog rt ping
+
+    - name: Docker Push to JFrog
+      run: jfrog rt docker-push aratimahe/helloworldapplication:latest githubactionsjfrog.jfrog.io/helloworldapplication/docker/
