@@ -59,5 +59,3 @@ jobs:
     - name: Docker Push to JFrog
       run: |
         jfrog rt docker-push aratimahe/helloworldapplication:latest githubactionsjfrog.jfrog.io/helloworldapplication/docker/ --url $JF_URL
-
-   
