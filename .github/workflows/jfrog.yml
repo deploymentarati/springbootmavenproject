@@ -44,7 +44,9 @@ jobs:
     - name: JFrog CLI Setup
       uses: jfrog/setup-jfrog-cli@v3
       with:
-        jfrog-cli-version: '2.52.10'  # Replace with the latest version available
+        version: '2.52.10'
+        oidc-provider-name: ''
+        oidc-audience: ''
       env:
         JF_URL: ${{ secrets.JfrogArtifacttory }}
         JF_USER: ${{ secrets.JfrogUser }}
@@ -55,4 +57,7 @@ jobs:
       run: jfrog rt ping
 
     - name: Docker Push to JFrog
-      run: jfrog rt docker-push aratimahe/helloworldapplication:latest githubactionsjfrog.jfrog.io/helloworldapplication/docker/ --url $JF_URL
+      run: |
+        jfrog rt docker-push aratimahe/helloworldapplication:latest githubactionsjfrog.jfrog.io/helloworldapplication/docker/ --url $JF_URL
+
+   
