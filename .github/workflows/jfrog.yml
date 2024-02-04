@@ -61,9 +61,8 @@ jobs:
       run: jfrog rt ping --url=$JF_URL
 
     - name: Docker Login to JFrog Artifactory
-      run: |
-        docker login -u "${{ secrets.JF_USER }}" -p "${{ secrets.JF_PASSWORD }}" githubactionsjfrog.jfrog.io
+      run: echo ${{ secrets.JF_PASSWORD }} | docker login -u ${{ secrets.JF_USER }} --password-stdin githubactionsjfrog.jfrog.io
 
     - name: Docker Push to JFrog
       run: |
-        jfrog rt docker-push githubactionsjfrog.jfrog.io/myrepo/aratimahe/helloworldapplication:latest --url=$JF_URL
+        jfrog rt docker-push githubactionsjfrog.jfrog.io/myrepo/aratimahe/helloworldapplication:latest --url=$JF_URL --user=${{ secrets.JF_USER }} --password=${{ secrets.JF_PASSWORD }}
