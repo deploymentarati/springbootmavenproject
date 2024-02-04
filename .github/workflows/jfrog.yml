@@ -57,4 +57,4 @@ jobs:
       run: jfrog rt ping --url=$JF_URL
 
     - name: Docker Push to JFrog
-      run: jfrog rt docker-push aratimahe/helloworldapplication:latest githubactionsjfrog.jfrog.io/myrepo/helloworldapplication/docker/ --url=$JF_URL
+      run: jfrog rt docker-push aratimahe/helloworldapplication:latest githubactionsjfrog.jfrog.io/myrepo --url=$JF_URL
