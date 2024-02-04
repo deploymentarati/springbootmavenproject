@@ -41,10 +41,6 @@ jobs:
 
         docker images
 
-    - name: Tag Docker Image
-      run: |
-        docker tag aratimahe/helloworldapplication githubactionsjfrog.jfrog.io/myrepo/aratimahe/helloworldapplication:latest
-
     - name: JFrog CLI Setup
       uses: jfrog/setup-jfrog-cli@v3
       with:
