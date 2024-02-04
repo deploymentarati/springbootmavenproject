@@ -41,7 +41,7 @@ jobs:
 
         docker images
 
-    - name: Docker Tag
+    - name: Tag Docker Image
       run: |
         docker tag aratimahe/helloworldapplication githubactionsjfrog.jfrog.io/myrepo/aratimahe/helloworldapplication:latest
 
@@ -60,8 +60,8 @@ jobs:
     - name: JFrog CLI Ping
       run: jfrog rt ping --url=$JF_URL
 
-    - name: Docker Login to JFrog Artifactory
+    - name: Docker Login to JFrog
       run: echo ${{ secrets.JF_PASSWORD }} | jfrog rt docker-login githubactionsjfrog.jfrog.io/myrepo/aratimahe --url=$JF_URL --user=${{ secrets.JF_USER }} --password-stdin
 
     - name: Docker Push to JFrog
-      run: jfrog rt docker-push githubactionsjfrog.jfrog.io/myrepo/aratimahe/helloworldapplication:latest --url=$JF_URL --user=${{ secrets.JF_USER }}
+      run: jfrog rt docker-push githubactionsjfrog.jfrog.io/myrepo/aratimahe/helloworldapplication:latest --url=$JF_URL
