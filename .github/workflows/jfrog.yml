@@ -58,8 +58,8 @@ jobs:
 
     - name: Tag the Docker Image
       run: |
-        docker tag aratimahe/helloworldapplication githubactionsjfrog.jfrog.io/githubactionwithjfrog/helloworldapplication:latest
+        docker tag aratimahe/helloworldapplication githubactionsjfrog.jfrog.io/githubactionsjfrog/helloworldapplication:latest
 
     - name: Docker Push to JFrog
       run: |
-        jfrog rt docker-push githubactionsjfrog.jfrog.io/githubactionwithjfrog/helloworldapplication:latest --url=$JF_URL
+        jfrog rt docker-push githubactionsjfrog.jfrog.io/githubactionsjfrog/helloworldapplication:latest --url=$JF_URL
