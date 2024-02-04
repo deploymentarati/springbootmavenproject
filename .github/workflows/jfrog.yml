@@ -54,7 +54,7 @@ jobs:
         JF_SERVER_ID: "SERVER"
 
     - name: JFrog CLI Ping
-      run: jfrog rt ping --url=$JF_URL
+      run: jfrog rt ping --url=${JF_URL}
 
     - name: Tag the Docker Image
       run: |
@@ -62,4 +62,4 @@ jobs:
 
     - name: Docker Push to JFrog
       run: |
-        jfrog rt docker-push githubactionsjfrog.jfrog.io/githubactionwithjfrog/helloworldapplication:latest --url=$JF_URL
+        jfrog rt docker-push githubactionsjfrog.jfrog.io/githubactionwithjfrog/helloworldapplication:latest --url=${{ secrets.JfrogArtifacttory }}
