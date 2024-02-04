@@ -49,7 +49,7 @@ jobs:
         oidc-audience: ''
       env:
         JF_URL: ${{ secrets.JF_URL }}
-        JF_USER: ${{ secrets.JF_USERNAME }}
+        JF_USER: ${{ secrets.JF_USER }}
         JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
         JF_SERVER_ID: "SERVER"
 
