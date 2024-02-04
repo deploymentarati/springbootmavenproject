@@ -53,13 +53,16 @@ jobs:
         JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
         JF_SERVER_ID: "SERVER"
 
+    - name: JFrog CLI Configure Server
+      run: |
+        jfrog rt c --url $JF_URL --user $JF_USER --password $JF_PASSWORD --interactive=false --server-id $JF_SERVER_ID
+
     - name: JFrog CLI Ping
-      run: jfrog rt ping --url=$JF_URL
+      run: jfrog rt ping
 
     - name: Tag the Docker Image
       run: |
-        docker tag aratimahe/helloworldapplication  githubactionsjfrog.jfrog.io/myrepo/aratimahe/helloworldapplication:latest
-
+        docker tag aratimahe/helloworldapplication githubactionsjfrog.jfrog.io/myrepo/aratimahe/helloworldapplication:latest
 
     - name: Docker Push to JFrog
       run: |
