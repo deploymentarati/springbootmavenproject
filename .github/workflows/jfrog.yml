@@ -54,7 +54,7 @@ jobs:
         JF_SERVER_ID: "SERVER"
 
     - name: JFrog CLI Ping
-      run: jfrog rt ping
+      run: jfrog rt ping --url=${JF_URL}
 
     - name: Tag the Docker Image
       run: |
