@@ -44,26 +44,15 @@ jobs:
     - name: JFrog CLI Setup
       uses: jfrog/setup-jfrog-cli@v3
       with:
-        version: '2.52.10'
-        oidc-provider-name: ''
-        oidc-audience: ''
+        jfrog-cli-version: 'latest'
       env:
-        JF_URL: ${{ secrets.JF_URL }}
-        JF_USER: ${{ secrets.JF_USER }}
-        JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
+        JF_URL: ${{ secrets.JfrogArtifacttory }}
+        JF_USER: ${{ secrets.JfrogUser }}
+        JF_PASSWORD: ${{ secrets.JfrogUserAPIKey }}
         JF_SERVER_ID: "SERVER"
 
-    - name: JFrog CLI Configure Server
-      run: |
-        jfrog rt c --url $JF_URL --user $JF_USER --password $JF_PASSWORD --interactive=false --server-id $JF_SERVER_ID
-
     - name: JFrog CLI Ping
-      run: jfrog rt ping --url=$JF_URL
-
-    - name: Tag the Docker Image
-      run: |
-        docker tag aratimahe/helloworldapplication githubactionsjfrog.jfrog.io/myrepo/aratimahe/helloworldapplication:latest
+      run: jfrog rt ping
 
     - name: Docker Push to JFrog
-      run: |
-        jfrog rt docker-push githubactionsjfrog.jfrog.io/myrepo/aratimahe/helloworldapplication:latest --url=$JF_URL
+      run: jfrog rt docker-push aratimahe/helloworldapplication:latest githubactionsjfrog.jfrog.io/myrepo/helloworldapplication/docker/
