@@ -48,13 +48,13 @@ jobs:
         oidc-provider-name: ''
         oidc-audience: ''
       env:
-        JF_URL: ${{ secrets.JfrogArtifacttory }}
-        JF_USER: ${{ secrets.JfrogUser }}
-        JF_PASSWORD: ${{ secrets.JfrogUserAPIKey }}
+        JF_URL: ${{ secrets.JF_URL }}
+        JF_USER: ${{ secrets.JF_USERNAME }}
+        JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
         JF_SERVER_ID: "SERVER"
 
     - name: JFrog CLI Ping
-      run: jfrog rt ping --url=${JF_URL}
+      run: jfrog rt ping 
 
     - name: Tag the Docker Image
       run: |
@@ -62,4 +62,4 @@ jobs:
 
     - name: Docker Push to JFrog
       run: |
-        jfrog rt docker-push githubactionsjfrog.jfrog.io/githubactionwithjfrog/helloworldapplication:latest --url=${{ secrets.JfrogArtifacttory }}
+        jfrog rt docker-push githubactionsjfrog.jfrog.io/githubactionwithjfrog/helloworldapplication:latest --url=$JF_URL
