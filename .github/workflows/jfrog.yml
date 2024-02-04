@@ -58,7 +58,7 @@ jobs:
         jfrog rt c --url $JF_URL --user $JF_USER --password $JF_PASSWORD --interactive=false --server-id $JF_SERVER_ID
 
     - name: JFrog CLI Ping
-      run: jfrog rt ping
+      run: jfrog rt ping --url=$JF_URL
 
     - name: Tag the Docker Image
       run: |
@@ -66,4 +66,4 @@ jobs:
 
     - name: Docker Push to JFrog
       run: |
-        jfrog rt docker-push githubactionsjfrog.jfrog.io/myrepo/aratimahe/helloworldapplication --url=$JF_URL
+        jfrog rt docker-push githubactionsjfrog.jfrog.io/myrepo/aratimahe/helloworldapplication:latest --url=$JF_URL
