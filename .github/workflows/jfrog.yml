@@ -41,6 +41,10 @@ jobs:
 
         docker images
 
+    - name: Docker Tag
+      run: |
+        docker tag aratimahe/helloworldapplication githubactionsjfrog.jfrog.io/myrepo/aratimahe/helloworldapplication:latest
+
     - name: JFrog CLI Setup
       uses: jfrog/setup-jfrog-cli@v3
       with:
@@ -56,5 +60,10 @@ jobs:
     - name: JFrog CLI Ping
       run: jfrog rt ping --url=$JF_URL
 
+    - name: Docker Login to JFrog Artifactory
+      run: |
+        docker login -u "${{ secrets.JF_USER }}" -p "${{ secrets.JF_PASSWORD }}" githubactionsjfrog.jfrog.io
+
     - name: Docker Push to JFrog
-      run: jfrog rt docker-push aratimahe/helloworldapplication:latest githubactionsjfrog.jfrog.io/myrepo/helloworldapplication --url=$JF_URL
+      run: |
+        jfrog rt docker-push githubactionsjfrog.jfrog.io/myrepo/aratimahe/helloworldapplication:latest --url=$JF_URL
